@@ -5,28 +5,54 @@
   <title>The Sunken Fate – Games</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style>
-    :root{--bg:#111;--surface:#1a1a1a;--accent:#ff4500;--light:#fff;--radius:10px;--max:1100px}
+    :root {
+      --bg:#111113;
+      --surface:#1a1a1d;
+      --card:#252528;
+      --accent:#ff4500;
+      --light:#ffffff;
+      --grey:#888898;
+      --radius:12px;
+      --max:1100px;
+    }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     img{display:block;max-width:100%}
-    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--light);line-height:1.6;-webkit-font-smoothing:antialiased}
-    header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;background:var(--surface);border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:10}
+    body{
+      font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--light);
+      line-height:1.6;-webkit-font-smoothing:antialiased;
+    }
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.75rem 1.25rem;background:var(--surface);border-bottom:2px solid var(--accent);
+      position:sticky;top:0;z-index:10;
+    }
     .logo{font-family:'Orbitron',sans-serif;font-weight:800;font-size:1.5rem;color:var(--accent);letter-spacing:1px}
     #ham{display:none;background:none;border:none;color:var(--light);font-size:1.4rem;cursor:pointer}
     nav a{color:var(--light);text-decoration:none;margin-left:1.25rem;font-weight:600;transition:color .2s}
     nav a:hover{color:var(--accent)}
     h1{font-family:'Orbitron',sans-serif;font-size:2.2rem;text-align:center;margin:2.5rem 0 1.5rem;letter-spacing:1px;color:var(--accent)}
     .grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));padding:0 1rem;max-width:var(--max);margin:auto auto 3rem}
-    .card{background:var(--surface);border-radius:var(--radius);overflow:hidden;text-align:center;transition:transform .2s,box-shadow .2s;text-decoration:none;color:var(--light);border:1px solid #333}
-    .card:hover{transform:translateY(-4px);box-shadow:0 0 12px rgba(255,69,0,.5)}
+    .card{background:var(--card);border-radius:var(--radius);overflow:hidden;text-align:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;text-decoration:none;color:var(--light);border:1px solid rgba(255,69,0,.15);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+    .card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 30px rgba(255,69,0,.25);border-color:rgba(255,69,0,.4)}
     .card img{height:130px;object-fit:cover;width:100%}
     .label{display:block;padding:.7rem .5rem;font-weight:600;font-size:1rem}
     .cat-flag{display:inline-block;margin-top:.25rem;padding:.2rem .6rem;background:var(--accent);color:var(--light);font-size:.65rem;border-radius:4px;text-transform:uppercase}
-    footer{text-align:center;padding:2rem 1rem;font-size:.9rem;background:var(--surface);color:var(--light)}
+    /* ----- app-card reuse ----- */
+    .app-card{background:var(--card);border-radius:var(--radius);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;color:var(--light);border:1px solid rgba(255,69,0,.15);box-shadow:0 8px 20px rgba(0,0,0,.25);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+    .app-card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 30px rgba(255,69,0,.25);border-color:rgba(255,69,0,.4)}
+    .app-icon{width:56px;height:56px;border-radius:12px;object-fit:cover;margin-bottom:.75rem;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--accent),#ff8c42) border-box;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    .app-name{font-size:.95rem;font-weight:600;letter-spacing:.5px;background:linear-gradient(135deg,var(--light),#ffb3a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .add-app-btn{background:rgba(37,37,40,.3);border:2px dashed var(--accent);cursor:pointer}
+    .add-app-btn:hover{background:rgba(37,37,40,.5);border-style:solid}
+    .add-app-icon{font-size:2.2rem;color:var(--accent);margin-bottom:.5rem}
+    footer{text-align:center;padding:2rem 1rem;font-size:.85rem;background:var(--surface);color:var(--grey)}
     @media(max-width:700px){
       nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-top:1px solid #333}
-      nav.open{display:flex}#ham{display:block}
-      nav a{margin:0;padding:.8rem 1.2rem;border-bottom:1px solid #333}
+      nav.open{display:flex}#ham{display:block}nav a{margin:0;padding:.8rem 1.2rem;border-bottom:1px solid #333}
     }
   </style>
 </head>
@@ -37,17 +63,27 @@
   <button id="ham">☰</button>
   <nav id="nav">
     <a href="index.html">Home</a>
-    <a href="games.html">Games</a>
-    <a href="#about">About</a>
+    <a href="Games.html">Games</a>
+    <a href="Apps.html">Apps</a>
   </nav>
 </header>
 
-<h1>All Games</h1>
+<!--  GAMES SECTION  -->
+<h1>Games</h1>
 <div class="grid" id="gameGrid"></div>
 
-<footer id="about">© <span id="yr"></span> The Sunken Fate</footer>
+<!--  APPS SECTION  -->
+<h1>Apps</h1>
+<div class="grid" id="appGrid"></div>
+
+<footer>© <span id="yr"></span> The Sunken Fate</footer>
 
 <script>
+  // mobile nav
+  document.getElementById('ham').onclick = () => document.getElementById('nav').classList.toggle('open');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ---------------- GAMES DATA ----------------
   const games = [
     { title: "Slope", path: "g/slope", image: "images/slope.png", category: "RACING" },
     { title: "Retro Bowl", path: "g/retro-bowl", image: "images/retrobowl.jpg", category: "SPORTS" },
@@ -135,7 +171,20 @@
     { title: "Sand Boxels", path: "g/sandboxels", image: "https://sandboxels.r74n.com/icons/icon.png", category: "SANDBOX" }
   ];
 
-  const grid = document.getElementById('gameGrid');
+  // ---------------- APPS DATA (same as your Apps.html) ----------------
+  const apps = [
+    { name: "TikTok",    url: "/static/embed.html#https://tiktok.com", icon: "https://sf-tb-sg.ibytedtos.com/obj/eden-sg/uhtyvueh7nulogpoguhm/tiktok-icon2.png", cat: "social" },
+    { name: "Twitch",    url: "/static/embed.html#https://twitch.tv", icon: "https://cdn-icons-png.flaticon.com/512/5968/5968819.png", cat: "social" },
+    { name: "Google",    url: "/static/embed.html#https://google.com", icon: "https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png", cat: "tools" },
+    { name: "now.gg",    url: "/static/embed.html#https://now.gg", icon: "https://play-lh.googleusercontent.com/4HXQ3J_VX4QEMVQ6JvBVQr1X7bz0YJ-2qY9TOfIGK9_1HxE9Jwwh0L9kQr7JmBqYJY=w240-h480-rw", cat: "games" },
+    { name: "VS Code",   url: "/static/embed.html#https://vscode.dev", icon: "https://code.visualstudio.com/assets/images/code-stable.png", cat: "tools" },
+    { name: "HTML Unleashed", url: "https://html-unleashed.pages.dev", icon: "https://cdn-icons-png.flaticon.com/512/732/732212.png", cat: "education" },
+    { name: "YouTube",   url: "/static/embed.html#https://youtube.com", icon: "https://www.youtube.com/s/desktop/d743f786/img/favicon_144x144.png", cat: "social" },
+    { name: "Discord",   url: "/static/embed.html#https://discord.com", icon: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png", cat: "social" }
+  ];
+
+  // render games
+  const gameGrid = document.getElementById('gameGrid');
   games.forEach(g => {
     const card = document.createElement('a');
     card.className = 'card';
@@ -144,7 +193,35 @@
       <img src="${g.image}" alt="${g.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 320 130\'%3E%3Crect fill=\'%23444\' width=\'320\' height=\'130\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23ff4500\' font-family=\'Orbitron\' font-size=\'22\'%3E${g.title}%3C/text%3E%3C/svg%3E'">
       <span class="label">${g.title}<br><span class="cat-flag">${g.category}</span></span>
     `;
-    grid.appendChild(card);
+    gameGrid.appendChild(card);
+  });
+
+  // render apps
+  const appGrid = document.getElementById('appGrid');
+  apps.forEach(a => {
+    const card = document.createElement('a');
+    card.className = 'app-card';
+    card.href = a.url;
+    card.dataset.cat = a.cat;
+    card.innerHTML = `
+      <img src="${a.icon}" alt="${a.name}" class="app-icon">
+      <span class="app-name">${a.name}</span>
+    `;
+    appGrid.appendChild(card);
+  });
+
+  // optional: simple search for apps (games stay untouched)
+  const searchApps = document.createElement('input');
+  searchApps.type = 'text';
+  searchApps.placeholder = 'Search apps...';
+  searchApps.style.cssText = 'display:block;margin:1.5rem auto 1rem;padding:.6rem 1rem;border-radius:50px;border:none;background:var(--card);color:var(--light);width:clamp(250px,90%,600px);';
+  appGrid.before(searchApps);
+
+  searchApps.addEventListener('input', () => {
+    const q = searchApps.value.toLowerCase();
+    document.querySelectorAll('#appGrid .app-card').forEach(c => {
+      c.style.display = c.querySelector('.app-name').textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
   });
 </script>
 

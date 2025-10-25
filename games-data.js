@@ -84,5 +84,5 @@ window.GAMES = [
   { "title": "Geometry Dash", "path": "g/geodash", "image": "images/geodash.jpg", "category": "PLATFORMER" },
   { "title": "Duck Life 1", "path": "g/ducklife1", "image": "images/ducklife1.png", "category": "SIMULATION" },
   { "title": "Sand Boxels", "path": "g/sandboxels", "image": "https://sandboxels.r74n.com/icons/icon.png", "category": "SANDBOX" },
-  { "title": "EmulatorJS", "path": "/emulator/emulatorjs/", "image": "/emulator/logo.png/", "category": "EMULATOR" }
+  { "title": "EmulatorJS", "path": "https://nicelycat.github.io/gamesite/emulator/emulatorjs/", "image": "/emulator/logo.png/", "category": "EMULATOR" }
 ];

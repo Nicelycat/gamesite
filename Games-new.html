@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Sunken Fate – Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#111113;--surface:#1a1a1d;--card:#252528;--accent:#ff4500;--light:#ffffff;--grey:#888898;--radius:12px;--max:1100px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    img{display:block;max-width:100%}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--light);line-height:1.6;-webkit-font-smoothing:antialiased}
+    header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;background:var(--surface);border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:10}
+    .logo{font-family:'Orbitron',sans-serif;font-weight:800;font-size:1.5rem;color:var(--accent);letter-spacing:1px}
+    #ham{display:none;background:none;border:none;color:var(--light);font-size:1.4rem;cursor:pointer}
+    nav a{color:var(--light);text-decoration:none;margin-left:1.25rem;font-weight:600;transition:color .2s}nav a:hover{color:var(--accent)}
+    h1{font-family:'Orbitron',sans-serif;font-size:2.2rem;text-align:center;margin:2.5rem 0 1.5rem;letter-spacing:1px;color:var(--accent)}
+    .grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));padding:0 1rem;max-width:var(--max);margin:auto auto 3rem}
+    .card{background:var(--card);border-radius:var(--radius);overflow:hidden;text-align:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;text-decoration:none;color:var(--light);border:1px solid rgba(255,69,0,.15);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+    .card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 30px rgba(255,69,0,.25);border-color:rgba(255,69,0,.4)}
+    .card img{height:130px;object-fit:cover;width:100%}
+    .label{display:block;padding:.7rem .5rem;font-weight:600;font-size:1rem}
+    .cat-flag{display:inline-block;margin-top:.25rem;padding:.2rem .6rem;background:var(--accent);color:var(--light);font-size:.65rem;border-radius:4px;text-transform:uppercase}
+    footer{text-align:center;padding:2rem 1rem;font-size:.85rem;background:var(--surface);color:var(--grey)}
+    @media(max-width:700px){nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-top:1px solid #333}nav.open{display:flex}#ham{display:block}nav a{margin:0;padding:.8rem 1.2rem;border-bottom:1px solid #333}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">THE SUNKEN FATE</div>
+  <button id="ham">☰</button>
+  <nav id="nav">
+    <a href="index.html">Home</a>
+    <a href="Games.html">Games</a>
+    <a href="Apps.html">Apps</a>
+    <a href="Settings.html">Settings</a>
+  </nav>
+</header>
+
+<h1>Games</h1>
+<div class="grid" id="gameGrid"></div>
+
+<footer>© <span id="yr"></span> The Sunken Fate</footer>
+
+<script>
+  document.getElementById('ham').onclick = () => document.getElementById('nav').classList.toggle('open');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ----------  load games from games-data.js  ----------
+  fetch('games-data.js')
+    .then(r => r.ok ? r.text() : Promise.reject())
+    .then(txt => { eval(txt); return GAMES; })
+    .then(list => {
+      const grid = document.getElementById('gameGrid');
+      list.forEach(g => {
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = g.path;
+        card.innerHTML = `
+          <img src="${g.image}" alt="${g.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 320 130\'%3E%3Crect fill=\'%23444\' width=\'320\' height=\'130\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23ff4500\' font-family=\'Orbitron\' font-size=\'22\'%3E${g.title}%3C/text%3E%3C/svg%3E'">
+          <span class="label">${g.title}<br><span class="cat-flag">${g.category}</span></span>
+        `;
+        grid.appendChild(card);
+      });
+    })
+    .catch(() => {}); // silent fail → empty grid
+</script>
+
+</body>
+</html>

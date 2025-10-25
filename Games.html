@@ -6,30 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
   <style>
-    :root {
-      --bg:#111113;
-      --surface:#1a1a1d;
-      --card:#252528;
-      --accent:#ff4500;
-      --light:#ffffff;
-      --grey:#888898;
-      --radius:12px;
-      --max:1100px;
-    }
+    :root{--bg:#111113;--surface:#1a1a1d;--card:#252528;--accent:#ff4500;--light:#ffffff;--grey:#888898;--radius:12px;--max:1100px}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     img{display:block;max-width:100%}
-    body{
-      font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--light);
-      line-height:1.6;-webkit-font-smoothing:antialiased;
-    }
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:.75rem 1.25rem;background:var(--surface);border-bottom:2px solid var(--accent);
-      position:sticky;top:0;z-index:10;
-    }
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--light);line-height:1.6;-webkit-font-smoothing:antialiased}
+    header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;background:var(--surface);border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:10}
     .logo{font-family:'Orbitron',sans-serif;font-weight:800;font-size:1.5rem;color:var(--accent);letter-spacing:1px}
     #ham{display:none;background:none;border:none;color:var(--light);font-size:1.4rem;cursor:pointer}
     nav a{color:var(--light);text-decoration:none;margin-left:1.25rem;font-weight:600;transition:color .2s}nav a:hover{color:var(--accent)}
@@ -44,14 +26,8 @@
     .app-card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 30px rgba(255,69,0,.25);border-color:rgba(255,69,0,.4)}
     .app-icon{width:56px;height:56px;border-radius:12px;object-fit:cover;margin-bottom:.75rem;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--accent),#ff8c42) border-box;box-shadow:0 4px 12px rgba(0,0,0,.3)}
     .app-name{font-size:.95rem;font-weight:600;letter-spacing:.5px;background:linear-gradient(135deg,var(--light),#ffb3a0);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .add-app-btn{background:rgba(37,37,40,.3);border:2px dashed var(--accent);cursor:pointer}
-    .add-app-btn:hover{background:rgba(37,37,40,.5);border-style:solid}
-    .add-app-icon{font-size:2.2rem;color:var(--accent);margin-bottom:.5rem}
     footer{text-align:center;padding:2rem 1rem;font-size:.85rem;background:var(--surface);color:var(--grey)}
-    @media(max-width:700px){
-      nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-top:1px solid #333}
-      nav.open{display:flex}#ham{display:block}nav a{margin:0;padding:.8rem 1.2rem;border-bottom:1px solid #333}
-    }
+    @media(max-width:700px){nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-top:1px solid #333}nav.open{display:flex}#ham{display:block}nav a{margin:0;padding:.8rem 1.2rem;border-bottom:1px solid #333}}
   </style>
 </head>
 <body>
@@ -82,29 +58,54 @@
   document.getElementById('ham').onclick = () => document.getElementById('nav').classList.toggle('open');
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // ---------------- GAMES DATA ----------------
-  const games = [
-    { title: "Slope", path: "g/slope", image: "images/slope.png", category: "RACING" },
-    { title: "Retro Bowl", path: "g/retro-bowl", image: "images/retrobowl.jpg", category: "SPORTS" },
-    { title: "DeadShot.io", path: "g/deadshotio", image: "images/deadshotio.png", category: "ACTION" },
-    { title: "Gunspin", path: "g/gunspin", image: "/images/gunspin.png", category: "ACTION" },
-    { title: "1v1.lol", path: "g/1v1lol", image: "https://play-lh.googleusercontent.com/QYGRIDJbyVO7L7jH8CwiKJ4NumTGgcTVqU3ITooLWxro-eeNns1RZ0uwGGFe-r8M4co", category: "ACTION" },
-    { title: "Block Blast", path: "g/blockblast", image: "images/blockblast.png", category: "PUZZLE" },
-    { title: "Idle Breakout", path: "g/idle-breakout", image: "images/idlebreakout.png", category: "IDLE" },
-    { title: "Learn To Fly", path: "g/learntofly", image: "g/learntofly/1/icon.png", category: "ARCADE" },
-    { title: "Baldi's Basics", path: "g/baldisbasics", image: "images/baldisbasics.png", category: "HORROR" },
-    { title: "Gun Mayhem", path: "g/gunmayhem", image: "images/gunmayhem.png", category: "ACTION" },
-    { title: "Gun Mayhem 2", path: "g/gunmayhem2", image: "images/gunmayhem2.png", category: "ACTION" },
-    { title: "Wall Smash", path: "g/wallsmash", image: "images/wallsmash.png", category: "ARCADE" },
-    { title: "FNAF 1", path: "g/fnaf", image: "images/fnaf.png", category: "HORROR" },
-    { title: "FNAF 2", path: "g/fnaf-2", image: "images/fnaf2.png", category: "HORROR" },
-    { title: "Drift Boss", path: "g/driftboss", image: "images/driftboss.png", category: "RACING" },
-    { title: "Jack Smith", path: "g/jacksmith", image: "images/jacksmith.png", category: "ADVENTURE" },
-    { title: "Image Tracer", path: "/imagetracer", image: "images/imagetracer.png", category: "TOOLS" },
-    { title: "Infinite Craft", path: "g/infinitecraft", image: "images/infinitecraft.png", category: "PUZZLE" },
-    { title: "Crazy Tunnel 3D", path: "g/crazytunnel3d", image: "images/crazytunnel3d.png", category: "RACING" },
-    { title: "Lazy Jump 3D", path: "g/lazyjump3d", image: "images/lazyjump3d.png", category: "ARCADE" },
-    { title: "House Of Hazards", path: "g/houseofhazards", image: "images/houseofhazards.png", category: "ACTION" },
+  // ----------  load games from games.json  ----------
+  fetch('games.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(buildGames)
+    .catch(() => {}); // silent fail -> empty grid
+
+  function buildGames(games) {
+    const grid = document.getElementById('gameGrid');
+    games.forEach(g => {
+      const card = document.createElement('a');
+      card.className = 'card';
+      card.href = g.path;
+      card.innerHTML = `
+        <img src="${g.image}" alt="${g.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 320 130\'%3E%3Crect fill=\'%23444\' width=\'320\' height=\'130\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23ff4500\' font-family=\'Orbitron\' font-size=\'22\'%3E${g.title}%3C/text%3E%3C/svg%3E'">
+        <span class="label">${g.title}<br><span class="cat-flag">${g.category}</span></span>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ----------  static apps  ----------
+  const apps = [
+    { name: "TikTok", url: "/static/embed.html#https://tiktok.com", icon: "https://sf-tb-sg.ibytedtos.com/obj/eden-sg/uhtyvueh7nulogpoguhm/tiktok-icon2.png", cat: "social" },
+    { name: "Twitch", url: "/static/embed.html#https://twitch.tv", icon: "https://cdn-icons-png.flaticon.com/512/5968/5968819.png", cat: "social" },
+    { name: "Google", url: "/static/embed.html#https://google.com", icon: "https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png", cat: "tools" },
+    { name: "now.gg", url: "/static/embed.html#https://now.gg", icon: "https://play-lh.googleusercontent.com/4HXQ3J_VX4QEMVQ6JvBVQr1X7bz0YJ-2qY9TOfIGK9_1HxE9Jwwh0L9kQr7JmBqYJY=w240-h480-rw", cat: "games" },
+    { name: "VS Code", url: "/static/embed.html#https://vscode.dev", icon: "https://code.visualstudio.com/assets/images/code-stable.png", cat: "tools" },
+    { name: "HTML Unleashed", url: "https://html-unleashed.pages.dev", icon: "https://cdn-icons-png.flaticon.com/512/732/732212.png", cat: "education" },
+    { name: "YouTube", url: "/static/embed.html#https://youtube.com", icon: "https://www.youtube.com/s/desktop/d743f786/img/favicon_144x144.png", cat: "social" },
+    { name: "Discord", url: "/static/embed.html#https://discord.com", icon: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png", cat: "social" }
+  ];
+
+  const appGrid = document.getElementById('appGrid');
+  apps.forEach(a => {
+    const card = document.createElement('a');
+    card.className = 'app-card';
+    card.href = a.url;
+    card.dataset.cat = a.cat;
+    card.innerHTML = `
+      <img src="${a.icon}" alt="${a.name}" class="app-icon">
+      <span class="app-name">${a.name}</span>
+    `;
+    appGrid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
     { title: "Hole.io", path: "g/holeio", image: "images/holeio.png", category: "IO" },
     { title: "Cut The Rope", path: "g/cut-the-rope", image: "images/cuttherope.png", category: "PUZZLE" },
     { title: "Tank Trouble", path: "g/tanktrouble", image: "images/tanktrouble.png", category: "ACTION" },

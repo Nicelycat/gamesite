@@ -60,7 +60,7 @@
 
   // ----------  load games from games.json  ----------
     // ----------  load games from games.js  ----------
-  fetch('games.js')
+  fetch('games-data.js')
     .then(r => r.ok ? r.text() : Promise.reject())
     .then(txt => { eval(txt); return GAMES; }) // exposes GAMES
     .then(buildGames)

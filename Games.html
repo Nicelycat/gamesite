@@ -59,10 +59,13 @@
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   // ----------  load games from games.json  ----------
-  fetch('games.json')
-    .then(r => r.ok ? r.json() : Promise.reject())
+    // ----------  load games from games.js  ----------
+  fetch('games.js')
+    .then(r => r.ok ? r.text() : Promise.reject())
+    .then(txt => { eval(txt); return GAMES; }) // exposes GAMES
     .then(buildGames)
-    .catch(() => {}); // silent fail -> empty grid
+    .catch(() => {}); // silent fail
+
 
   function buildGames(games) {
     const grid = document.getElementById('gameGrid');
